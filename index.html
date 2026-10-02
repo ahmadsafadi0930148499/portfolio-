@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أحمد صفدي | Video Editor & Motion Graphics Designer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0d17;
+            --card-bg: rgba(22, 27, 46, 0.7);
+            --accent-color: #ff2a5f;
+            --accent-glow: rgba(255, 42, 95, 0.5);
+            --purple-glow: rgba(138, 43, 226, 0.5);
+            --whatsapp-green: #25D366;
+            --whatsapp-glow: rgba(37, 211, 102, 0.4);
+            --text-main: #ffffff;
+            --text-sub: #a0a5c0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .ambient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .glow-sphere {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.4;
+            animation: float 10s infinite alternate ease-in-out;
+        }
+
+        .glow-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-glow);
+            top: -100px;
+            right: -100px;
+        }
+
+        .glow-2 {
+            width: 500px;
+            height: 500px;
+            background: var(--purple-glow);
+            bottom: -150px;
+            left: -150px;
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(60px, 80px) scale(1.2); }
+        }
+
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 3rem 2rem;
+            position: relative;
+        }
+
+        .hero-container {
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-img {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 0 25px var(--accent-glow);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(255, 42, 95, 0.15);
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff 30%, var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p.tagline {
+            font-size: 1.3rem;
+            color: var(--accent-color);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cv-summary {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 1.5rem;
+            border-radius: 16px;
+            max-width: 680px;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .cv-summary p {
+            color: var(--text-sub);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Software & Tools Section */
+        .tools-section {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+            perspective: 1000px;
+        }
+
+        .tool-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(60px) rotateX(-20px) scale(0.7);
+            animation: popIn 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+        }
+
+        .tool-card:nth-child(1) { animation-delay: 0.4s; }
+        .tool-card:nth-child(2) { animation-delay: 0.6s; }
+        .tool-card:nth-child(3) { animation-delay: 0.8s; }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: translateY(60px) rotateX(-20px) scale(0.7);
+            }
+            70% {
+                opacity: 1;
+                transform: translateY(-8px) rotateX(10px) scale(1.08);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) rotateX(0deg) scale(1);
+            }
+        }
+
+        .tool-card:hover {
+            transform: translateY(-8px) scale(1.05);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 25px rgba(255, 42, 95, 0.35);
+            background: rgba(255, 255, 255, 0.09);
+        }
+
+        .tool-card img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .tool-card:hover img {
+            transform: rotate(8deg) scale(1.1);
+        }
+
+        .tool-card span {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .portfolio-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title p {
+            color: var(--text-sub);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Video Card Styling */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            backdrop-filter: blur(16px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--accent-color);
+            box-shadow: 0 15px 35px var(--accent-glow);
+        }
+
+        .card-media {
+            height: 190px;
+            position: relative;
+            overflow: hidden;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .preview-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            pointer-events: none;
+        }
+
+        .card:hover .preview-video {
+            opacity: 1;
+            transform: scale(1.06);
+        }
+
+        .tool-tag {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(8px);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            z-index: 2;
+        }
+
+        .play-icon {
+            position: absolute;
+            width: 55px;
+            height: 55px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+            box-shadow: 0 0 20px var(--accent-glow);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            z-index: 2;
+        }
+
+        .card:hover .play-icon {
+            transform: scale(1.15);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-body h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-body p {
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .drive-archive-box {
+            margin-top: 5rem;
+            text-align: center;
+            padding: 3rem;
+            background: linear-gradient(135deg, rgba(255, 42, 95, 0.05), rgba(138, 43, 226, 0.05));
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+        }
+
+        .drive-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 1.5rem;
+            padding: 14px 28px;
+            background: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 50px;
+            box-shadow: 0 10px 25px var(--accent-glow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .drive-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px var(--accent-color);
+        }
+
+        /* Contact Section & WhatsApp Button */
+        .contact-section {
+            margin-top: 4rem;
+            text-align: center;
+            padding: 3rem 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .contact-section h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-section p {
+            color: var(--text-sub);
+            margin-bottom: 1.8rem;
+            font-size: 1.05rem;
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 36px;
+            background-color: var(--whatsapp-green);
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.15rem;
+            font-weight: 700;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px var(--whatsapp-glow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.6);
+            background-color: #20bd5a;
+        }
+
+        .whatsapp-btn svg {
+            width: 28px;
+            height: 28px;
+            fill: currentColor;
+        }
+
+        /* Modal Player */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 900px;
+            aspect-ratio: 16/9;
+            background: #000;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-content video {
+            width: 100%;
+            height: 100%;
+            outline: none;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            color: white;
+            font-size: 2.2rem;
+            cursor: pointer;
+            z-index: 1010;
+            line-height: 1;
+            background: rgba(0, 0, 0, 0.5);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: var(--accent-color);
+        }
+
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal-element.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-bg">
+        <div class="glow-sphere glow-1"></div>
+        <div class="glow-sphere glow-2"></div>
+    </div>
+
+    <!-- Header Section -->
+    <header class="hero">
+        <div class="hero-container reveal-element active">
+            <img src="profile.jpg" alt="أحمد صفدي" class="profile-img">
+            
+            <span class="badge">Portfolio</span>
+            <h1>أحمد صفدي</h1>
+            <p class="tagline">Video Editor • Motion Graphics Designer • AI Visual Artist</p>
+            
+            <div class="cv-summary">
+                <p>
+                    مونتير ومصمم موشن جرافيك ومؤثرات بصرية (VFX)، محترف في استخدام برامج Adobe After Effects و Premiere Pro، ومتخصص في صناعة المحتوى الإعلاني والسينمائي المتقدم ودمج أدوات الذكاء الاصطناعي الحديثة (Magnific AI & Kling AI) لإنتاج مشاهد مرئية عالية الجودة والقيمة.
+                </p>
+            </div>
+
+            <div class="tools-section">
+                <div class="tool-card">
+                    <img src="ae.png" alt="Adobe After Effects">
+                    <span>After Effects</span>
+                </div>
+                <div class="tool-card">
+                    <img src="pr.png" alt="Adobe Premiere Pro">
+                    <span>Premiere Pro</span>
+                </div>
+                <div class="tool-card">
+                    <img src="magnific.png" alt="Magnific AI">
+                    <span>Magnific AI</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio-section">
+        <div class="section-title reveal-element">
+            <h2>أبرز الأعمال المختارة</h2>
+            <p>ضع الماوس على أي مشروع لمعاينة الحركة أو انقر عليه لمشاهدة الفيديو بالصوت</p>
+        </div>
+
+        <div class="grid" id="featured-projects">
+            
+            <!-- بطاقة الفيديو 1 -->
+            <div class="card reveal-element delay-1" onclick="openVideo('video1.mp4')">
+                <div class="card-media">
+                    <video class="preview-video" src="video1.mp4" autoplay loop muted playsinline></video>
+                    <span class="tool-tag">After Effects</span>
+                    <div class="play-icon">▶</div>
+                </div>
+                <div class="card-body">
+                    <h3>مشروع موشن جرافيك وتأثيرات بصرية</h3>
+                    <p>تحريك مشهد كامل وتجميع طبقات مع إضافة مؤثرات سينمائية.</p>
+                </div>
+            </div>
+
+            <!-- بطاقة الفيديو 2 -->
+            <div class="card reveal-element delay-2" onclick="openVideo('video2.mp4')">
+                <div class="card-media">
+                    <video class="preview-video" src="video2.mp4" autoplay loop muted playsinline></video>
+                    <span class="tool-tag">Magnific AI + AE</span>
+                    <div class="play-icon">▶</div>
+                </div>
+                <div class="card-body">
+                    <h3>تحسين المعالجة البصرية ورفع الدقة</h3>
+                    <p>دمج تفاصيل الذكاء الاصطناعي مع معالجة وتحريك الإطارات.</p>
+                </div>
+            </div>
+
+            <!-- بطاقة الفيديو 3 -->
+            <div class="card reveal-element delay-3" onclick="openVideo('video3.mp4')">
+                <div class="card-media">
+                    <video class="preview-video" src="video3.mp4" autoplay loop muted playsinline></video>
+                    <span class="tool-tag">Premiere Pro</span>
+                    <div class="play-icon">▶</div>
+                </div>
+                <div class="card-body">
+                    <h3>مونتاج سينمائي وهندسة صوتية</h3>
+                    <p>قص ديناميكي سريع ومزامنة الإيقاع مع المؤثرات الصوتية.</p>
+                </div>
+            </div>
+
+            <!-- بطاقة الفيديو 4 -->
+            <div class="card reveal-element delay-4" onclick="openVideo('video4.mp4')">
+                <div class="card-media">
+                    <video class="preview-video" src="video4.mp4" autoplay loop muted playsinline></video>
+                    <span class="tool-tag">After Effects</span>
+                    <div class="play-icon">▶</div>
+                </div>
+                <div class="card-body">
+                    <h3>إعلان بصري قصير (Reel)</h3>
+                    <p>تصميم ريلز احترافي يتناسب مع المنصات العمودية الحديثة.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Google Drive Section -->
+        <div class="drive-archive-box reveal-element">
+            <h3>هل ترغب في مشاهدة المزيد من الأعمال؟</h3>
+            <p>يمكنك الاطلاع على الأرشيف الكامل لجميع المشاريع والتصاميم المكتملة عبر Google Drive</p>
+            <a href="https://drive.google.com/drive/folders/18C1hMdwhIH5u92s0rSBryCqgFoCDuKbS?usp=drive_link" target="_blank" class="drive-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3z"/>
+                </svg>
+                تصفح أرشيف الأعمال الكامل على Google Drive
+            </a>
+        </div>
+
+        <!-- Contact Section / WhatsApp -->
+        <div class="contact-section reveal-element">
+            <h3>هل لديك مشروع ترغب في تنفيذه؟</h3>
+            <p>تواصل معي مباشرة عبر واتساب لبدء العمل على مشروعك القادم</p>
+            <a href="https://wa.me/963930148499?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%A3%D8%AD%D9%85%D8%AF%D8%8C%20%D8%B4%D8%A7%D9%87%D8%AF%D8%AA%20%D9%85%D9%88%D9%82%D8%B9%D9%83%20%D9%88%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%AA%D9%88%D8%A7%D8%B5%D9%84%20%D9%85%D8%B9%D9%83%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5%20%D9%85%D8%B4%D8%B1%D9%88%D8%B9" target="_blank" class="whatsapp-btn">
+                <svg viewBox="0 0 24 24">
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                </svg>
+                تواصل معي عبر الواتساب مباشرة
+            </a>
+        </div>
+    </section>
+
+    <!-- Modal Video Player -->
+    <div class="modal" id="videoModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeVideo()">&times;</span>
+            <video id="player" controls autoplay style="width: 100%; height: 100%;">
+                <source id="videoSource" src="" type="video/mp4">
+                متصفحك لا يدعم تشغيل الفيديو.
+            </video>
+        </div>
+    </div>
+
+    <script>
+        const videoModal = document.getElementById('videoModal');
+        const player = document.getElementById('player');
+        const videoSource = document.getElementById('videoSource');
+
+        function openVideo(videoFile) {
+            videoSource.src = videoFile;
+            player.load();
+            videoModal.style.display = 'flex';
+            player.play();
+        }
+
+        function closeVideo() {
+            player.pause();
+            videoModal.style.display = 'none';
+            videoSource.src = '';
+        }
+
+        videoModal.addEventListener('click', function(e) {
+            if (e.target === videoModal) {
+                closeVideo();
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const observerOptions = {
+                root: null,
+                threshold: 0.15
+            };
+
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("active");
+                    }
+                });
+            }, observerOptions);
+
+            const elementsToReveal = document.querySelectorAll(".reveal-element");
+            elementsToReveal.forEach(el => revealObserver.observe(el));
+        });
+    </script>
+</body>
+</html>
